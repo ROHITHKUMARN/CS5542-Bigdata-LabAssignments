@@ -416,9 +416,9 @@ object IPApp {
 
     //rftestImageClassification(sc)
 
-   //naivebayesModel(sc)
+   naivebayesModel(sc)
 
-   decisionTreeModel(sc)
+  // decisionTreeModel(sc)
 
     val testImages = sc.wholeTextFiles(s"${IPSettings.TEST_INPUT_DIR}/*/*.jpg")
     val testImagesArray = testImages.collect()
@@ -426,7 +426,7 @@ object IPApp {
     testImagesArray.foreach(f => {
       println(f._1)
       val splitStr = f._1.split("file:/")
-      val predictedClass: Double = dtclassifyImage(sc, splitStr(1))
+      val predictedClass: Double = nbclassifyImage(sc, splitStr(1))
       val segments = f._1.split("/")
       val cat = segments(segments.length - 2)
       val GivenClass = IMAGE_CATEGORIES.indexOf(cat)
